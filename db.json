@@ -1,0 +1,37 @@
+{
+  "users": [
+    {
+      "nome": "Moacir",
+      "cpf": "555.855.369-80",
+      "email": "moacir.andretti@gmail.com",
+      "cep": "35.400-000",
+      "rua": "Conde",
+      "numero": "300",
+      "bairro": "Centro",
+      "cidade": "Belo horizonte",
+      "id": "dea3737f"
+    },
+    {
+      "nome": "Moacir",
+      "cpf": "555.855.369-80",
+      "email": "moacir.andretti@gmail.com",
+      "cep": "35.400-000",
+      "rua": "Conde",
+      "numero": "300",
+      "bairro": "Centro",
+      "cidade": "Belo horizonte",
+      "id": "c2c6159d"
+    },
+    {
+      "nome": "Moacir",
+      "cpf": "555.855.369-80",
+      "email": "moacir.andretti@gmail.com",
+      "cep": "35.400-000",
+      "rua": "Conde",
+      "numero": "300",
+      "bairro": "Centro",
+      "cidade": "Belo horizonte",
+      "id": "x2861595"
+    }
+  ]
+}
