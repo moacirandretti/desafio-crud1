@@ -1,23 +1,12 @@
-import React, { useState, useRef, useEffect } from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link, useHistory } from "react-router-dom"
 import api from "../../services/api"
-import {
-	Title,
-	Banner,
-	Containner,
-	FormSubmit,
-	Footer,
-	Input,
-	ButtonNav,
-	NavBar
-} from "./style"
+import { Title, Banner, Containner, ButtonNav, NavBar } from "./style"
 import { FiTrash2, FiEdit } from "react-icons/fi"
 
 const Listagem = () => {
 	const [usuarios, setUsuarios] = useState([])
-	const [statusCheckbox, setStatusCheckbox] = useState(false)
 
-	const [id, setID] = useState("")
 	const [nome, setNome] = useState("")
 	const [cpf, setCpf] = useState("")
 	const [email, setEmail] = useState("")
@@ -27,11 +16,39 @@ const Listagem = () => {
 	const [bairro, setBairro] = useState("")
 	const [cidade, setCidade] = useState("")
 
+	// Verifica se está logado
+	const history = useHistory()
+
+	useEffect(() => {
+		const userToken = localStorage.getItem("userToken")
+
+		try {
+			const chamaAPI = async () => {
+				const response = await api.get("funcionarios")
+				const token = response.data[0].token
+
+				if (userToken == token) {
+				} else {
+					history.push("/")
+				}
+			}
+			chamaAPI()
+		} catch (err) {
+			history.push("/")
+		}
+	}, [])
+
+	// LogOut do sistema
+	const logout = () => {
+		localStorage.clear()
+		return history.push("/")
+	}
+
 	// Recupera os Usuários cadastrados
 	useEffect(() => {
 		try {
 			async function callAPI() {
-				const response = await api.get("users")
+				const response = await api.get("usuarios")
 				setUsuarios(response.data)
 			}
 			callAPI()
@@ -55,7 +72,7 @@ const Listagem = () => {
 		novoCidade
 	) => {
 		try {
-			const response = api.put(`${"users/" + id}`, {
+			const response = api.put(`${"usuarios/" + id}`, {
 				nome: novoNome,
 				cpf: novoCpf,
 				email: novoEmail,
@@ -75,7 +92,7 @@ const Listagem = () => {
 	// Deletar Usuário
 	async function handleDeletePedido(id) {
 		try {
-			await api.delete(`users/${id}`)
+			await api.delete(`usuarios/${id}`)
 
 			setUsuarios(usuarios.filter((pedido) => pedido.id !== id))
 		} catch (error) {
@@ -96,7 +113,7 @@ const Listagem = () => {
 					</Link>
 
 					<Link to="/">
-						<ButtonNav>LogOut</ButtonNav>
+						<ButtonNav onClick={logout}>LogOut</ButtonNav>
 					</Link>
 				</NavBar>
 

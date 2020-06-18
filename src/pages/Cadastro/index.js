@@ -92,7 +92,7 @@ const Cadastro = () => {
 
 		try {
 			await schema.validate(data, { abortEarly: false })
-			await api.post("users", data)
+			await api.post("usuarios", data)
 
 			alert("Usuário cadastrado com sucesso!")
 		} catch (err) {
