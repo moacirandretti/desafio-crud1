@@ -74,6 +74,19 @@ export const FormSubmit = styled.form`
 		}
 	}
 `
+export const CepButton = styled.span`
+	width: 100px;
+	text-align: center;
+	height: 20px;
+	color: #fff;
+	font-size: 15px;
+	border: 0;
+	margin-top: 10px;
+	border-radius: 5px;
+	background-color: #697fbf;
+	cursor: pointer;
+`
+
 export const Footer = styled.div`
 	position: absolute;
 	display: flex;

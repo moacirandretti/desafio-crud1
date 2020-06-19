@@ -1,9 +1,17 @@
 import React, { useState, useRef } from "react"
 import { Link } from "react-router-dom"
 import api from "../../services/api"
+import axios from "axios"
 import * as Yup from "yup"
 import crypto from "crypto"
-import { Title, Banner, Containner, FormSubmit, Footer } from "./style"
+import {
+	Title,
+	Banner,
+	Containner,
+	FormSubmit,
+	Footer,
+	CepButton
+} from "./style"
 
 const Cadastro = () => {
 	const inputNome = useRef(null)
@@ -30,12 +38,12 @@ const Cadastro = () => {
 		nome: Yup.string().required("Nome obrigatório"),
 		cpf: Yup.string()
 			.matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, { excludeEmptyString: true })
-			.min(11)
+			.min(11, "O CPF deve conter 11 digitos.")
 			.required("CPF obrigatório"),
 
 		email: Yup.string().required("E-mail inválido").email(),
 
-		cep: Yup.string().required("CEP obrigatório").min(10, "CEP inválido"),
+		cep: Yup.string().required("CEP obrigatório").min(8, "CEP inválido"),
 		rua: Yup.string().required("Insira sua RUA"),
 
 		numero: Yup.number().required("Insira o NÚMERO do seu endereço"),
@@ -74,6 +82,19 @@ const Cadastro = () => {
 			p_campo_destino.current.focus()
 	}
 
+	// API Via CEP
+
+	const handleCEP = async (cep) => {
+		const response = await axios.get(
+			`${"https://viacep.com.br/ws/" + cep + "/json/"}`
+		)
+		setRua(response.data.logradouro)
+		setBairro(response.data.bairro)
+		setCidade(response.data.localidade)
+
+		return console.log(response.data)
+	}
+
 	// Enviando cadastro
 	const data = {
 		id: crypto.randomBytes(4).toString("HEX"),
@@ -97,7 +118,13 @@ const Cadastro = () => {
 			alert("Usuário cadastrado com sucesso!")
 		} catch (err) {
 			if (err instanceof Yup.ValidationError) {
-				console.log(err)
+				// console.log(err)
+				// alert(err.errors)
+				// console.log(err.errors)
+				for (const erro of err.errors) {
+					console.log(erro)
+					// alert(erro)
+				}
 			}
 		}
 	}
@@ -112,7 +139,6 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="Nome"
-						required={true}
 						value={nome}
 						onChange={(e) => {
 							setNome(e.target.value)
@@ -124,7 +150,6 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="CPF"
-						required={true}
 						value={cpf}
 						onChange={(e) => {
 							setCpf(mcpf(e.target.value))
@@ -136,7 +161,6 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="e-mail"
-						required={true}
 						value={email}
 						onChange={(e) => {
 							setEmail(e.target.value)
@@ -148,22 +172,22 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="CEP"
-						required={true}
 						value={cep}
 						onChange={(e) => {
-							setCep(mCEP(e.target.value))
+							setCep(e.target.value)
 							pularCampo(inputCep, inputRua)
 						}}
-						maxLength={10}
+						maxLength={8}
 						ref={inputCep}
 					/>
+					<CepButton onClick={() => handleCEP(cep)}>Buscar CEP</CepButton>
 					<input
 						type="text"
 						placeholder="Rua"
-						required={true}
 						value={rua}
 						onChange={(e) => {
 							setRua(e.target.value)
+
 							pularCampo(inputRua, inputNumero)
 						}}
 						maxLength={35}
@@ -172,7 +196,6 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="N°"
-						required={true}
 						value={numero}
 						onChange={(e) => {
 							setNumero(mNum(e.target.value))
@@ -184,7 +207,6 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="Bairro"
-						required={true}
 						value={bairro}
 						onChange={(e) => {
 							setBairro(e.target.value)
@@ -196,7 +218,6 @@ const Cadastro = () => {
 					<input
 						type="text"
 						placeholder="Cidade"
-						required={true}
 						value={cidade}
 						onChange={(e) => {
 							setCidade(e.target.value)
