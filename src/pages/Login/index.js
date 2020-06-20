@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import api from "../../services/api"
+import * as Yup from "yup"
 import { Title, Banner, Containner, Form, Footer } from "./style"
 
 const Login = () => {
@@ -10,10 +11,26 @@ const Login = () => {
 	const [login, setLogin] = useState("")
 	const [pass, setPass] = useState("")
 
+	// Validação Yup
+	const schema = Yup.object().shape({
+		login: Yup.string().required("E-mail inválido").email(),
+		pass: Yup.string()
+			.required("Nome obrigatório")
+			.min(4, "Senha com no mínimo 4 caractéres")
+	})
+
+	const data = {
+		login: login,
+		pass: pass
+	}
+
+	// Função para fazer login e armazenar o token no localStorage
 	async function handleLogin(e) {
 		e.preventDefault()
 
 		try {
+			await schema.validate(data, { abortEarly: false })
+
 			const response = await api.get("funcionarios")
 			const usuario = response.data[0].login
 			const password = response.data[0].password
@@ -38,8 +55,8 @@ const Login = () => {
 				</Banner>
 				<Form onSubmit={handleLogin}>
 					<input
-						type="text"
-						placeholder="Usuário é admin"
+						type="email"
+						placeholder="Usuário: admin@admin.com"
 						required={true}
 						minLength={4}
 						value={login}
@@ -48,7 +65,7 @@ const Login = () => {
 
 					<input
 						type="password"
-						placeholder="Senha é 1234"
+						placeholder="Senha: 1234"
 						required={true}
 						minLength={4}
 						value={pass}
@@ -57,11 +74,7 @@ const Login = () => {
 					<button>Logar</button>
 				</Form>
 
-				<Footer>
-					<Link to="/cadastro">
-						<a>REGISTRAR</a>
-					</Link>
-				</Footer>
+				<Footer />
 			</Containner>
 		</>
 	)

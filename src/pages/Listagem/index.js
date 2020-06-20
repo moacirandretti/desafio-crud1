@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import api from "../../services/api"
-import { Title, Banner, Containner, ButtonNav, NavBar } from "./style"
-import { FiTrash2, FiEdit } from "react-icons/fi"
+import { Title, Banner, Containner, Icon, Busca } from "./style"
+import { FiTrash2, FiEdit, FiSearch, FiUsers } from "react-icons/fi"
+import { MdCached } from "react-icons/md"
+import NavMenu from "../../components/Nav"
 
 const Listagem = () => {
 	const [usuarios, setUsuarios] = useState([])
@@ -10,11 +12,13 @@ const Listagem = () => {
 	const [nome, setNome] = useState("")
 	const [cpf, setCpf] = useState("")
 	const [email, setEmail] = useState("")
-	const [cep, setCep] = useState()
+	const [cep, setCep] = useState(0)
 	const [rua, setRua] = useState("")
-	const [numero, setNumero] = useState()
+	const [numero, setNumero] = useState(0)
 	const [bairro, setBairro] = useState("")
 	const [cidade, setCidade] = useState("")
+
+	const [query, setQuery] = useState("")
 
 	// Verifica se está logado
 	const history = useHistory()
@@ -37,12 +41,6 @@ const Listagem = () => {
 			history.push("/")
 		}
 	}, [])
-
-	// LogOut do sistema
-	const logout = () => {
-		localStorage.clear()
-		return history.push("/")
-	}
 
 	// Recupera os Usuários cadastrados
 	useEffect(() => {
@@ -100,22 +98,52 @@ const Listagem = () => {
 		}
 	}
 
+	// Fazer pesquisa
+	async function handleQuery(query) {
+		try {
+			const response = await api.get("usuarios?q=" + query)
+			setUsuarios(response.data)
+		} catch (error) {
+			alert("Erro a fazer pesquisa! Tente novamente!")
+		}
+	}
+
+	async function handleQueryOff() {
+		try {
+			const response = await api.get("usuarios")
+			setUsuarios(response.data)
+		} catch (error) {
+			alert("Erro ao refazer pesquisa!")
+		}
+	}
+
 	return (
 		<>
+			<NavMenu />
 			<Containner>
 				<Banner>
 					<Title>Usuários Cadastrados</Title>
 				</Banner>
 
-				<NavBar>
-					<Link to="/cadastro">
-						<ButtonNav>Cadastro</ButtonNav>
-					</Link>
-
-					<Link to="/">
-						<ButtonNav onClick={logout}>LogOut</ButtonNav>
-					</Link>
-				</NavBar>
+				<Busca>
+					<input
+						type="text"
+						defaultValue={query}
+						onChange={(e) => {
+							setQuery(e.target.value)
+						}}
+					/>
+					<FiSearch
+						onClick={() => handleQuery(query)}
+						size={35}
+						style={{ cursor: "pointer" }}
+					/>
+					<MdCached
+						onClick={() => handleQueryOff()}
+						size={40}
+						style={{ cursor: "pointer", color: "#f24182", paddingLeft: "10px" }}
+					/>
+				</Busca>
 
 				<table>
 					<tr>
@@ -194,32 +222,36 @@ const Listagem = () => {
 									</td>
 
 									<td>
-										<FiTrash2
-											size={20}
-											color="red"
-											onClick={() => handleDeletePedido(item.id)}
-											style={{ cursor: "pointer" }}
-										/>
+										<Icon>
+											<FiTrash2
+												size={20}
+												color="red"
+												onClick={() => handleDeletePedido(item.id)}
+												style={{ cursor: "pointer" }}
+											/>
+										</Icon>
 									</td>
 
 									<td>
-										<FiEdit
-											onClick={() =>
-												editUsuarioValue(
-													item.id,
-													nome,
-													cpf,
-													email,
-													cep,
-													rua,
-													numero,
-													bairro,
-													cidade
-												)
-											}
-											color="green"
-											style={{ cursor: "pointer" }}
-										/>
+										<Icon>
+											<FiEdit
+												onClick={() =>
+													editUsuarioValue(
+														item.id,
+														nome === "" ? item.nome : nome,
+														cpf === "" ? item.cpf : cpf,
+														email === "" ? item.email : email,
+														cep === 0 ? item.cep : cep,
+														rua === "" ? item.rua : rua,
+														numero === 0 ? item.numero : numero,
+														bairro === "" ? item.bairro : bairro,
+														cidade === "" ? item.cidade : cidade
+													)
+												}
+												color="green"
+												style={{ cursor: "pointer" }}
+											/>
+										</Icon>
 									</td>
 								</tr>
 							</>

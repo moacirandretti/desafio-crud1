@@ -6,15 +6,14 @@ export const Title = styled.h1`
 	text-align: center;
 	line-height: 60px;
 `
-
 export const Containner = styled.div`
 	max-width: 500px;
 	width: 100%;
 	min-height: 650px;
-	margin: 0 auto;
+	margin: 15px auto;
 	background-color: #fff;
 	border-radius: 8px;
-	position: relative;
+	/* position: relative; */
 
 	a {
 		color: #949494;
@@ -30,7 +29,6 @@ export const Banner = styled.div`
 	height: 60px;
 	text-align: center;
 	color: #fff;
-	overflow: none;
 `
 
 export const FormSubmit = styled.form`
@@ -42,11 +40,17 @@ export const FormSubmit = styled.form`
 
 	input {
 		width: 250px;
+		font-size: 20px;
 		height: 50px;
 		border-top: 0;
 		border-left: 0;
 		border-right: 0;
 		border-bottom: 1px solid #d9d9d9;
+
+		&:focus {
+			transition: 900ms;
+			border-bottom: 1px solid #4557bf;
+		}
 
 		&::placeholder {
 			color: #d9d9d9;
@@ -88,7 +92,7 @@ export const CepButton = styled.span`
 `
 
 export const Footer = styled.div`
-	position: absolute;
+	/* position: absolute; */
 	display: flex;
 	justify-content: space-around;
 	align-items: center;

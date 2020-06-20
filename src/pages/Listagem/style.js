@@ -11,10 +11,9 @@ export const Containner = styled.div`
 	/* max-width: 100vw; */
 	width: 90vw;
 	min-height: 90vh;
-	margin: 0 auto;
+	margin: 15px auto;
 	background-color: #fff;
 	border-radius: 8px;
-	position: relative;
 
 	table {
 		margin: 20px auto;
@@ -44,6 +43,7 @@ export const Containner = styled.div`
 	}
 
 	th {
+		font-family: "Oswald", sans-serif;
 		background-color: #697fbf;
 		color: white;
 		padding: 10px;
@@ -77,12 +77,14 @@ export const Input = styled.input.attrs((props) => ({
 		border-right: 0;
 		border-bottom: 1px solid #d9d9d9;
 
-
-
 		&::placeholder {
 			color: #d9d9d9;
 		}
 	}
+`
+
+export const Icon = styled.div`
+	text-align: center;
 `
 
 export const Banner = styled.div`
@@ -178,4 +180,17 @@ export const ButtonNav = styled.button`
 export const NavBar = styled.div`
 	display: flex;
 	justify-content: space-evenly;
+`
+
+export const Busca = styled.section`
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+
+	input {
+		width: 40%;
+		font-family: "Oswald", sans-serif;
+		font-size: 25px;
+		text-align: center;
+	}
 `

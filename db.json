@@ -1,48 +1,55 @@
 {
-
-	"funcionarios":[
-		{
-			"login": "admin",
-			"password": 1234,
-			"token": "dea3737fdea3737fdea3737f"
-
-		}
-	],
-
-
+  "funcionarios": [
+    {
+      "login": "admin@admin.com",
+      "password": 1234,
+      "token": "dea3737fdea3737fdea3737f"
+    }
+  ],
   "usuarios": [
     {
-      "nome": "Moacir",
+      "nome": "Murilo",
       "cpf": "555.855.369-80",
-      "email": "moacir.andretti@gmail.com",
-      "cep": "35.400-000",
+      "email": "antony@gmail.com",
+      "cep": "35400000",
       "rua": "Conde",
-      "numero": "300",
+      "numero": "650",
       "bairro": "Centro",
       "cidade": "Belo horizonte",
       "id": "dea3737f"
     },
     {
-      "nome": "Moacir",
+      "nome": "Murilo",
       "cpf": "555.855.369-80",
-      "email": "moacir.andretti@gmail.com",
-      "cep": "35.400-000",
-      "rua": "Conde",
-      "numero": "300",
-      "bairro": "Centro",
-      "cidade": "Belo horizonte",
-      "id": "c2c6159d"
-    },
-    {
-      "nome": "Moacir",
-      "cpf": "555.855.369-80",
-      "email": "moacir.andretti@gmail.com",
-      "cep": "35.400-000",
-      "rua": "Conde",
-      "numero": "300",
-      "bairro": "Centro",
+      "email": "antony@gmail.com",
+      "cep": "35400000",
+      "rua": "Conde Bobadela",
+      "numero": "150",
+      "bairro": "Pocinho",
       "cidade": "Belo horizonte",
       "id": "x2861595"
+    },
+    {
+      "nome": "Murilo",
+      "cpf": "555.555.555-55",
+      "email": "antony@gmail.com",
+      "cep": "35400000",
+      "rua": "Avenida Nossa Senhora das Graças",
+      "numero": "600",
+      "bairro": "Vila São Paulo",
+      "cidade": "Contagem",
+      "id": "6a04f83e"
+    },
+    {
+      "nome": "Murilo",
+      "cpf": "456.789.454-44",
+      "email": "antony@gmail.com",
+      "cep": "32210370",
+      "rua": "Avenida Nossa Senhora das Graças",
+      "numero": "1014",
+      "bairro": "Vila São Paulo",
+      "cidade": "Contagem",
+      "id": "41a403f7"
     }
   ]
 }

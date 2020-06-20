@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useRef, useEffect } from "react"
+import { Link, useHistory } from "react-router-dom"
 import api from "../../services/api"
+import NavMenu from "../../components/Nav"
 import axios from "axios"
 import * as Yup from "yup"
 import crypto from "crypto"
@@ -32,6 +33,28 @@ const Cadastro = () => {
 	const [numero, setNumero] = useState()
 	const [bairro, setBairro] = useState("")
 	const [cidade, setCidade] = useState("")
+
+	// Verifica autenticação
+	const history = useHistory()
+
+	useEffect(() => {
+		const userToken = localStorage.getItem("userToken")
+
+		try {
+			const chamaAPI = async () => {
+				const response = await api.get("funcionarios")
+				const token = response.data[0].token
+
+				if (userToken == token) {
+				} else {
+					history.push("/")
+				}
+			}
+			chamaAPI()
+		} catch (err) {
+			history.push("/")
+		}
+	}, [])
 
 	// Validação Yup
 	const schema = Yup.object().shape({
@@ -119,7 +142,7 @@ const Cadastro = () => {
 		} catch (err) {
 			if (err instanceof Yup.ValidationError) {
 				// console.log(err)
-				// alert(err.errors)
+				alert(err.errors)
 				// console.log(err.errors)
 				for (const erro of err.errors) {
 					console.log(erro)
@@ -131,6 +154,7 @@ const Cadastro = () => {
 
 	return (
 		<>
+			<NavMenu />
 			<Containner>
 				<Banner>
 					<Title>Cadastro</Title>
@@ -159,7 +183,7 @@ const Cadastro = () => {
 						ref={inputCpf}
 					/>
 					<input
-						type="text"
+						type="email"
 						placeholder="e-mail"
 						value={email}
 						onChange={(e) => {

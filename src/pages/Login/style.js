@@ -42,14 +42,22 @@ export const Form = styled.form`
 
 	input {
 		width: 250px;
+		text-align: center;
+		font-size: 30px;
 		height: 50px;
 		border-top: 0;
 		border-left: 0;
 		border-right: 0;
 		border-bottom: 1px solid #d9d9d9;
 
+		&:focus {
+			transition: 900ms;
+			border-bottom: 1px solid #4557bf;
+		}
+
 		&::placeholder {
 			color: #d9d9d9;
+			font-size: 20px;
 		}
 	}
 
