@@ -36,6 +36,10 @@ The system was designed 💬 to improve user accessibility ♿ and ease of use.
 
 In the project directory, you can run:
 
+### `yarn`
+
+Install the project dependencies to allow the project run correctly.
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />
