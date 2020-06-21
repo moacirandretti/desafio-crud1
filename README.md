@@ -4,17 +4,17 @@
 🚀 This small personal project has as main objective the learning and development of my skills 💡 with Stack JavaScript / ReactJS.⚛️
 Among the main skills worked throughout this project, we can highlight:
 
- - ✔️ API consumption with [Axios](https://github.com/axios/axios) 🔗
- - ✔️ Intergration with the [ViaCEP](https://viacep.com.br/) API
- - ✔️ Application of the React State concept 
- - ✔️ Back-end with [JSON Server](https://github.com/typicode/json-server)
- - ✔️ Application of the concept of immutability 
- - ✔️ Application of the concept of Property of components 
- - ✔️ Use of Styled Componets (CSS in JS) 💅  
- - ✔️ Fundamental concepts of HTML5 and CSS FlexBox 
- - ✔️ Forms Validation with [YUP](https://github.com/jquense/yup)  ⌨ 
- - ✔️ Interaction with browser localStorage ⌨ 
- - ✔️ Code versioning (GIT) 🔙
+  ✔️ API consumption with [Axios](https://github.com/axios/axios) 🔗
+  ✔️ Intergration with the [ViaCEP](https://viacep.com.br/) API
+  ✔️ Application of the React State concept 
+  ✔️ Back-end with [JSON Server](https://github.com/typicode/json-server)
+  ✔️ Application of the concept of immutability 
+  ✔️ Application of the concept of Property of components 
+  ✔️ Use of Styled Componets (CSS in JS) 💅  
+  ✔️ Fundamental concepts of HTML5 and CSS FlexBox 
+  ✔️ Forms Validation with [YUP](https://github.com/jquense/yup)  ⌨ 
+  ✔️ Interaction with browser localStorage ⌨ 
+  ✔️ Code versioning (GIT) 🔙
 
 # Screens
 
