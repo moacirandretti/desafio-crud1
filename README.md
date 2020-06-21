@@ -18,7 +18,13 @@ Among the main skills worked throughout this project, we can highlight:
 
 # Screens
 
+![enter image description here](https://imagensbrasil.org/images/2020/06/20/Tela-Login.png)
 
+
+
+![enter link description here](https://imagensbrasil.org/images/2020/06/20/Tela-Cadastro.png)
+
+![enter image description here](https://imagensbrasil.org/images/2020/06/20/Tela-Cadastro.png)
 
 # About the app
 
